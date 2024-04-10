@@ -5,7 +5,7 @@ import tempfile
 
 from fastapi import UploadFile
 
-from app.core.exceptions import ConversionException, TemplatingException
+from app.core.exceptions import ConversionException, JSONException, TemplatingException
 
 
 async def create_images_file(image_files: list[UploadFile]) -> tuple[str, list[str]]:
@@ -14,23 +14,26 @@ async def create_images_file(image_files: list[UploadFile]) -> tuple[str, list[s
     for image_file in image_files:
         with tempfile.NamedTemporaryFile(delete=False) as temp_image_file:
             temp_image_file.write(await image_file.read())
-            tempfiles.append(temp_image_file.name)
-            image_file_dict[image_file.filename] = _get_image_file_data(
-                temp_image_file.name
-            )
+        tempfiles.append(temp_image_file.name)
+        image_file_dict[image_file.filename] = _get_image_file_data(
+            temp_image_file.name
+        )
 
     with tempfile.NamedTemporaryFile(delete=False) as images_file:
         images_file.write(json.dumps(image_file_dict).encode())
-        tempfiles.append(images_file.name)
+    tempfiles.append(images_file.name)
 
     return images_file.name, tempfiles
 
 
 def create_data_file(json_data: str) -> tuple[str, list[str]]:
-    with tempfile.NamedTemporaryFile(delete=False) as data_file:
-        data_file.write(json.dumps(json.loads(json_data)).encode())
+    try:
+        with tempfile.NamedTemporaryFile(delete=False) as data_file:
+            data_file.write(json.dumps(json.loads(json_data)).encode())
 
-    return data_file.name, [data_file.name]
+        return data_file.name, [data_file.name]
+    except Exception as e:
+        raise JSONException(detail=str(e))
 
 
 async def create_template_file(docx_file: UploadFile) -> tuple[str, list[str]]:
@@ -41,8 +44,7 @@ async def create_template_file(docx_file: UploadFile) -> tuple[str, list[str]]:
 
 
 def reserve_docx_result_file() -> tuple[str, list[str]]:
-    with tempfile.NamedTemporaryFile(delete=False) as result_file_docx:
-        result_filename = result_file_docx.name
+    result_file_docx = tempfile.NamedTemporaryFile(delete=False)
 
     return result_file_docx.name, [result_file_docx.name]
 
@@ -88,7 +90,7 @@ def to_pdf(docx_file: str) -> str:
     )
 
     if result.stdout or result.stderr:
-        raise ConversionException(detail=result)
+        raise ConversionException(detail={"out": result.stdout, "err": result.stderr})
 
     return result_file_pdf_name_full
 
@@ -112,4 +114,4 @@ def to_docx(
     )
 
     if len(result.stdout):
-        raise TemplatingException(detail=result)
+        raise TemplatingException(detail={"out": result.stdout, "err": result.stderr})
