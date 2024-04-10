@@ -73,7 +73,6 @@ async def render_to_pdf(
     return FileResponse(
         result_file,
         media_type="application/pdf",
-        filename="response.pdf",
         background=BackgroundTask(cleanup, tempfiles),
     )
 
@@ -89,6 +88,5 @@ async def render_to_docx(
     return FileResponse(
         result_file,
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        filename="response.docx",
         background=BackgroundTask(cleanup, tempfiles),
     )
