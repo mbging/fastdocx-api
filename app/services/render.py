@@ -58,7 +58,7 @@ def _get_image_file_data(media_path: str) -> dict:
     try:
         with Image.open(media_path) as img:
             width, height = img.size
-        format = media_path.split(".")[-1].lower()
+            format = img.format.lower()
     except:
         pass
 
