@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.sqlite3
+.env/
+.venv/
+.pytest_cache/
+.vscode/
+htmlcov/
+.coverage
+
+package-lock.json
+node_modules/
+
+TODO
+ruff.toml
