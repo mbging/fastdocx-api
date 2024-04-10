@@ -11,7 +11,7 @@ class Configs:
     ENV: str = os.getenv("ENV", "dev")
     API: str = "/api"
     API_V1_STR: str = "/api/v1"
-    PROJECT_NAME: str = "fastapi-project"
+    PROJECT_NAME: str = os.getenv("PROJECT_NAME", "fastapi-project")
 
     PROJECT_ROOT: str = os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
