@@ -8,7 +8,7 @@ A FastAPI based project to generate DOCX and PDF documents from a DOCX template,
 The project uses `easy-template-x` to fill the DOCX template: all tags and filters provided by this project are available.
 
 ### Example
-!["LibreOffice to PDF"](app/tests/sample_data/preview.png)
+!["LibreOffice to PDF"](/app/tests/sample_data/preview.png)
 
 ## Prerequisites
 
