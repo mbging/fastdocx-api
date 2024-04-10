@@ -9,7 +9,7 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /app/scripts/scripts
+WORKDIR /app/scripts
 RUN npm install
 
 WORKDIR /
