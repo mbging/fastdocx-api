@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import tempfile
+from typing import Any
 
 from fastapi import UploadFile
 
@@ -17,12 +18,15 @@ async def create_images_file(image_files: list[UploadFile]) -> tuple[str, list[s
     Returns:
         tuple[str, list[str]]: The name of temporary file created as a string and in a list.
     """
-    image_file_dict: dict[str, str] = {}
+    image_file_dict: dict[str, dict[str, Any]] = {}
     tempfiles: list[str] = []
     for image_file in image_files:
         with tempfile.NamedTemporaryFile(delete=False) as temp_image_file:
             temp_image_file.write(await image_file.read())
         tempfiles.append(temp_image_file.name)
+        if not image_file.filename:
+            # Files without filenames will not be injected in the template
+            continue
         image_file_dict[image_file.filename] = _get_image_file_data(
             temp_image_file.name
         )
@@ -68,7 +72,7 @@ def reserve_docx_result_file() -> tuple[str, list[str]]:
     return result_file_docx.name, [result_file_docx.name]
 
 
-def _get_image_file_data(media_path: str) -> dict:
+def _get_image_file_data(media_path: str) -> dict[str, Any]:
     """Create a dict of an image metadata
 
     Args:

@@ -30,7 +30,7 @@ async def _render(
     docx_file: UploadFile = File(...),
     image_files: list[UploadFile] = File([]),
     pdf: bool = True,
-) -> None:
+) -> tuple[str, list[str]]:
     data_file_name, data_file_name_temp = render_service.create_data_file(json_data)
     (
         template_file_name,
