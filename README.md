@@ -2,7 +2,10 @@
 # FastDocx-API
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mbging/fastdocx-api/docker-hub.yaml)
+[![typedlib_mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://www.mypy-lang.org)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+![GitHub Actions Workflow Status](https://github.com/mbging/fastdocx-api/actions/workflows/docker-hub.yaml/badge.svg)
+![GitHub Actions Workflow Status](https://github.com/mbging/fastdocx-api/actions/workflows/lint.yaml/badge.svg)
 
 
 A FastAPI based project to generate DOCX and PDF documents from a DOCX template, JSON data and images.
