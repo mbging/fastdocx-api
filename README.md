@@ -1,6 +1,9 @@
 
 # FastDocx-API
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mbging/fastdocx-api/docker-hub.yaml)
+
 ## Description
 
 A FastAPI based project to generate DOCX and PDF documents from a DOCX template, JSON data and images.
