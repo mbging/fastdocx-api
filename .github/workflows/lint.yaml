@@ -15,10 +15,12 @@ jobs:
     # Installing all dependencies and not just the linters as mypy needs them for type checking
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install -r requirements.dev.txt
     - name: Lint with ruff
       run: |
         ruff check .
     - name: Lint with mypy
       run: |
-        mypy app/
+        mypy app
