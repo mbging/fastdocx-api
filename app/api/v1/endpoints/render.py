@@ -19,10 +19,8 @@ async def root():
 
 def cleanup(files):
     for filename in files:
-        try:
-            os.unlink(filename)
-        except:
-            pass
+        if os.path.exists(filename):
+            os.remove(filename)
 
 
 async def _render(
@@ -36,9 +34,7 @@ async def _render(
         template_file_name,
         template_file_name_temp,
     ) = await render_service.create_template_file(docx_file)
-    images_file_name, images_file_temp = await render_service.create_images_file(
-        image_files
-    )
+    images_file_name, images_file_temp = await render_service.create_images_file(image_files)
     result_file_docx_name, result_file_docx_name_temp = (
         render_service.reserve_docx_result_file()
     )

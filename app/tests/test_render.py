@@ -18,9 +18,7 @@ async def test_images_json():
 
     image_files = [
         UploadFile(open("./app/tests/sample_data/logo.png", "rb"), filename="logo.png"),
-        UploadFile(
-            open("./app/tests/sample_data/image.jpg", "rb"), filename="image.jpg"
-        ),
+        UploadFile(open("./app/tests/sample_data/image.jpg", "rb"), filename="image.jpg"),
     ]
 
     try:
@@ -52,7 +50,7 @@ def test_query_json_invalid():
                 "logo.png",
                 open("./app/tests/sample_data/logo.png", "rb").read(),
             ),
-            "image_files": (
+            "image_files": (  # noqa: F601
                 "image.jpg",
                 open("./app/tests/sample_data/image.jpg", "rb").read(),
             ),

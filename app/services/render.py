@@ -27,9 +27,7 @@ async def create_images_file(image_files: list[UploadFile]) -> tuple[str, list[s
         with tempfile.NamedTemporaryFile(delete=False) as temp_image_file:
             temp_image_file.write(await image_file.read())
         tempfiles.append(temp_image_file.name)
-        image_file_dict[image_file.filename] = _get_image_file_data(
-            temp_image_file.name
-        )
+        image_file_dict[image_file.filename] = _get_image_file_data(temp_image_file.name)
 
     with tempfile.NamedTemporaryFile(delete=False) as images_file:
         images_file.write(json.dumps(image_file_dict).encode())
@@ -90,7 +88,7 @@ def _get_image_file_data(media_path: str) -> dict[str, Any]:
         with Image.open(media_path) as img:
             width, height = img.size
             format = img.format.lower()
-    except:
+    except Exception:
         pass
 
     return {
