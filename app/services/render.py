@@ -21,12 +21,12 @@ async def create_images_file(image_files: list[UploadFile]) -> tuple[str, list[s
     image_file_dict: dict[str, dict[str, Any]] = {}
     tempfiles: list[str] = []
     for image_file in image_files:
-        with tempfile.NamedTemporaryFile(delete=False) as temp_image_file:
-            temp_image_file.write(await image_file.read())
-        tempfiles.append(temp_image_file.name)
         if not image_file.filename:
             # Files without filenames will not be injected in the template
             continue
+        with tempfile.NamedTemporaryFile(delete=False) as temp_image_file:
+            temp_image_file.write(await image_file.read())
+        tempfiles.append(temp_image_file.name)
         image_file_dict[image_file.filename] = _get_image_file_data(
             temp_image_file.name
         )
