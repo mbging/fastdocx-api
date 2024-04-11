@@ -5,6 +5,7 @@
 [![typedlib_mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://www.mypy-lang.org)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![GitHub Actions Workflow Status](https://github.com/mbging/fastdocx-api/actions/workflows/docker-hub.yaml/badge.svg)
+![GitHub Actions Workflow Status](https://github.com/mbging/fastdocx-api/actions/workflows/test.yaml/badge.svg)
 ![GitHub Actions Workflow Status](https://github.com/mbging/fastdocx-api/actions/workflows/lint.yaml/badge.svg)
 
 
